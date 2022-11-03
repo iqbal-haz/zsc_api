@@ -1,5 +1,5 @@
 Flask
 torch
-protobuf
+protobuf==3.20.*
 sentencepiece
 transformers
