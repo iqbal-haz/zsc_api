@@ -7,4 +7,3 @@ elif platform == "win32" or platform == "darwin":
     os.system("pip3 install torch torchaudio torchvision")
 
 os.system("pip install -r requirements.txt")
-os.system("python3 app.py")
