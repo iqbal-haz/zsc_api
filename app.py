@@ -8,7 +8,8 @@ import os
 with open("requirements.txt", 'r') as f:
     for package in f.readlines():
         package = package.rstrip()
-        punc = re.search(r'\W+', package).start()
+        punc = re.search(r'\W+', package)
+        punc = punc.start() if punc else None
         pkg_name = package[:punc]
 
         if find_spec(pkg_name) is None:
