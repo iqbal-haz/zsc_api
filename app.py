@@ -1,5 +1,25 @@
 from flask import Flask,request, jsonify
+from importlib.util import find_spec
 from transformers import pipeline
+from sys import platform
+import re
+import os
+
+with open("requirements.txt", 'r') as f:
+    for package in f.readlines():
+        package = package.rstrip()
+        punc = re.search(r'\W+', package).start()
+        pkg_name = package[:punc]
+
+        if find_spec(pkg_name) is None:
+            os.system(f"pip install {package}")
+
+# if platform == "linux" or platform == "linux2":
+#     os.system("pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu")
+# elif platform == "win32" or platform == "darwin":
+#     os.system("pip3 install torch torchaudio torchvision")
+
+# os.system("pip install -r requirements.txt")
 classifier = pipeline("zero-shot-classification", model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli")
 
 app = Flask(__name__)
